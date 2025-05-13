@@ -17,22 +17,48 @@ Interfaz avanzada para exploración de Pokémon desarrollada con arquitectura es
 
 ---
 
-## 🎨 Arquitectura UI/UX de Alto Nivel
-### Sistema de Diseño Responsivo
-- **Grid Adaptativo**: 12-columnas fluidas con breakpoints personalizados (xs: 360px, xl: 1440px)
-- **Paleta Dinámica**: Variables CSS con modo oscuro/light basado en Quasar Theme Builder
-- **Microinteracciones**: 
-  - Hover states con transform 3D en tarjetas
-  - Transiciones suaves en carga de datos
-  - Skeletons animados durante fetching
+## 🧠 Arquitectura del Proyecto
+Estructura modular basada en **Clean Architecture** optimizada para escalabilidad y mantenibilidad. Diseñada siguiendo las mejores prácticas de Quasar Framework y Vue 3 Composition API.
 
-### Patrones de Componentización
 ```bash
 src/
-├── components/            # Componentes UI Atómicos
-│   ├── pokemon/           # Dominio específico
-│   │   ├── PokemonCard.vue  # Smart component con lógica de presentación
-│   │   └── TypeBadge.vue    # Componente puramente visual
-├── layouts/               # Plantillas estructurales
-├── stores/                # Gestión de estado con Pinia
-└── services/              # Capa de negocio abstracta
+│
+├── assets/               # Recursos estáticos (SVGs, imágenes locales)
+│
+├── boot/                 # Configuraciones iniciales de Quasar
+│
+├── components/           # Componentes UI reutilizables (Atomic Design)
+│   ├── PokemonCard.vue    # Tarjeta interactiva con animaciones CSS
+│   ├── PokemonDetail.vue  # Modal de detalles con tabs dinámicos
+│   ├── PokemonList.vue    # Lista virtualizada para rendimiento
+│   └── SearchBar.vue      # Búsqueda con debounce y sugerencias
+│
+├── css/                  # Estilos globales y temas
+│   ├── app.scss           # Variables globales y mixins
+│   └── quasar.variables.scss  # Personalización del tema Quasar
+│
+├── layouts/              # Plantillas estructurales
+│   └── MainLayout.vue     # Layout principal con navegación
+│
+├── pages/                # Vistas enrutadas
+│   ├── ErrorNotFound.vue  # Página 404 personalizada
+│   └── IndexPage.vue      # Vista principal con lista de Pokémon
+│
+├── router/               # Gestión de navegación
+│   ├── index.ts           # Configuración central del router
+│   └── routes.ts          # Definición de rutas con lazy-loading
+│
+├── services/             # Lógica de negocio y API
+│   └── apiService.ts      # Cliente HTTP con interceptores
+│
+├── stores/               # Gestión de estado con Pinia
+│   ├── index.ts           # Inicialización central de stores
+│   └── pokemonStore.ts    # Store especializado en datos Pokémon
+│
+├── types/                # Definiciones TypeScript
+│   └── models.ts          # Tipos globales e interfaces
+│
+├── App.vue               # Componente raíz
+├── main.ts               # Punto de entrada de la aplicación
+└── vite.config.ts        # Configuración de Vite con plugins
+
